@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffe6f2;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        .heart {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            animation: beat 1s infinite;
+            z-index: 20;
+        }
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        .letter {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 24px;
+            color: #d63384;
+            max-width: 400px;
+            background-color: #fff;
+            border: 2px solid #d63384;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        .letter::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #d63384;
+        }
+        .chocolate {
+            position: absolute;
+            font-size: 24px;
+            pointer-events: none;
+            animation: fly 2s linear forwards;
+            --randomX: 0px;
+            z-index: 5;
+        }
+        @keyframes fly {
+            0% { opacity: 1; transform: translateY(0) rotate(0deg) translateX(0); }
+            100% { opacity: 0; transform: translateY(-200px) rotate(360deg) translateX(var(--randomX)); }
+        }
+        .button-love {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 16px;
+    font-size: 16px;
+    background-color: #ff5fa2;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    z-index: 30;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.button-love:hover {
+    background-color: #ff3b8d;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    z-index: 40;
+    display: none;
+    max-width: 300px;
+}
+
+.popup img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.popup p {
+    margin-top: 10px;
+    color: #d63384;
+    font-size: 18px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="heart">❤️</div>
+    <div class="letter">
+        <h2>My Dearest Love,</h2>
+        <p>Every moment with you is like a sweet chocolate melting in my heart. You make my world brighter and my days sweeter. I cherish you endlessly.</p>
+        <p>With all my love,</p>
+        <p>Your Admirer</p>
+    </div>
+    <button class="button-love" onclick="togglePopup()">💌 Open Surprise</button>
+
+    <div class="popup" id="popup">
+        <img src="your-image.jpg" alt="Love Image">
+        <p>Chúc bạn luôn vui vẻ, hạnh phúc và được yêu thương thật nhiều 💖</p>
+    </div>
+
+    <script>
+    function togglePopup() {
+        const popup = document.getElementById('popup');
+        popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+    }
+    </script>
+
+    <!-- <script>
+        document.addEventListener('mousemove', function(e) {
+            const chocolate = document.createElement('div');
+            chocolate.className = 'chocolate';
+            chocolate.textContent = '🍫';
+            chocolate.style.left = e.clientX + 'px';
+            chocolate.style.top = e.clientY + 'px';
+            chocolate.style.setProperty('--randomX', (Math.random() - 0.5) * 300 + 'px');  // Random spread from -150px to 150px
+            document.body.appendChild(chocolate);
+            
+            setTimeout(() => {
+                chocolate.remove();
+            }, 2000);
+        });
+    </script> -->
+    <script>
+        let lastTime = 0;
+        const delay = 50; // thời gian nghỉ giữa các icon (ms)
+
+        document.addEventListener('mousemove', function(e) {
+            const now = Date.now();
+            if (now - lastTime < delay) return; // chưa đủ thời gian thì bỏ qua
+            lastTime = now;
+
+            const chocolate = document.createElement('div');
+            chocolate.className = 'chocolate';
+            chocolate.textContent = '🍫';
+            chocolate.style.left = e.clientX + 'px';
+            chocolate.style.top = e.clientY + 'px';
+            chocolate.style.setProperty(
+                '--randomX',
+                (Math.random() - 0.5) * 300 + 'px'
+            );
+
+            document.body.appendChild(chocolate);
+
+            setTimeout(() => {
+                chocolate.remove();
+            }, 2000);
+        });
+
+    </script>
+
+</body>
+</html>
